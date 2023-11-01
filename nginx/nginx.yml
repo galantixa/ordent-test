@@ -28,7 +28,7 @@ spec:
               mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
             - name: log-volumes-nginx
-              mountPath: /var/log/nginx/
+              mountPath: /var/log/nginx
       volumes:
         - name: nginx-config
           configMap:
