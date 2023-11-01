@@ -10,6 +10,9 @@ fi
 read -p "Input PORT: " PORT
 PORT=${PORT:-6379}
 
+sudo apt update
+sudo apt install build-essential
+
 # download and install
 cd /tmp
 wget http://download.redis.io/releases/redis-7.0.0.tar.gz
