@@ -10,35 +10,19 @@ fi
 read -p "Input PORT: " PORT
 PORT=${PORT:-6379}
 
-sudo apt update
-sudo apt install build-essential
 
 # download and install
-cd /tmp
-wget http://download.redis.io/releases/redis-7.0.0.tar.gz
-tar xzf redis-7.0.0.tar.gz
-cd redis-7.0.0
-make
-# cek make
-if [ $? -ne 0 ]; then
-    echo "make failed"
-    exit 1
-fi
-
-make install
+sudo apt update
+sudo apt install build-essential
+sudo apt install -y redis-server
 
 # create user redis
-sudo adduser --system --group --no-create-home redis
-
-# create dir for redis data
-mkdir -p /var/lib/redis/$PORT
-cp redis.conf /var/lib/redis/$PORT.conf
-
+sudo adduser --system --group --no-create-home redis || true
 #  mengganti nilai port
-sed -i "s/port 6379/port $PORT/" /var/lib/redis/$PORT.conf
-# untuk mengubah direktori tempat redis menyimpan data
-sed -i "s|dir ./|dir /var/lib/redis/$PORT/|" /var/lib/redis/$PORT.conf
+sed -i "s/port 6379/port $PORT/" /etc/redis/redis.conf
 
 chown -R redis:redis /var/lib/redis
 # start redis
 systemctl restart redis-server
+
+echo "redis succesfully installed"
