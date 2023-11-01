@@ -19,6 +19,12 @@ wget http://download.redis.io/releases/redis-7.0.0.tar.gz
 tar xzf redis-7.0.0.tar.gz
 cd redis-7.0.0
 make
+# cek make
+if [ $? -ne 0 ]; then
+    echo "make failed"
+    exit 1
+fi
+
 make install
 
 # create user redis
@@ -35,4 +41,4 @@ sed -i "s|dir ./|dir /var/lib/redis/$PORT/|" /var/lib/redis/$PORT.conf
 
 chown -R redis:redis /var/lib/redis
 # start redis
-systemctl restart redis@$PORT
+systemctl restart redis-server
