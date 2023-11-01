@@ -21,7 +21,6 @@ sudo adduser --system --group --no-create-home redis || true
 #  mengganti nilai port
 sed -i "s/port 6379/port $PORT/" /etc/redis/redis.conf
 
-chown -R redis:redis /var/lib/redis
 # start redis
 systemctl restart redis-server
 
