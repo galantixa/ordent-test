@@ -4,7 +4,7 @@ metadata:
   name: mypv-nginx
 spec:
   capacity:
-    storage: 500Mi
+    storage: 1Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -14,4 +14,4 @@ spec:
     - hard
     - nfsvers=4.1
   hostPath:
-    path: /var/log/nginx/
+    path: /opt/data
